@@ -71,6 +71,17 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
+//Middleware functions
+const logRequest = (req, res, next) => {
+  console.log(`${new Date().toLocaleString()} Request made to : ${req.originalUrl}`);
+  next(); //Next is use for executing next phase
+}
+
+app.get('/', logRequest, (req, res) => {  // We will use middleware like this, this custom middleware tel us time when any url will hit.
+  res.send('Ka ho kaise aha');
+})
+
+
 //Now call api
 app.use('/person', personRoute);
 app.use('/menu', menuroutes)
