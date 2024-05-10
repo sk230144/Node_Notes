@@ -23,6 +23,15 @@ const personSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    }, 
+    //Added for passport js authentication
+    username: {
+        required: true,
+        type: String
+    },
+    password: {
+        type: String,
+        required: true
     }
 })
 

@@ -66,6 +66,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const personRoute = require('./routes/personRputes') 
 const menuroutes = require('./routes/menuRotes');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -76,6 +79,8 @@ const logRequest = (req, res, next) => {
   console.log(`${new Date().toLocaleString()} Request made to : ${req.originalUrl}`);
   next(); //Next is use for executing next phase
 }
+
+app.use(logRequest)
 
 app.get('/', logRequest, (req, res) => {  // We will use middleware like this, this custom middleware tel us time when any url will hit.
   res.send('Ka ho kaise aha');
