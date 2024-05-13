@@ -66,9 +66,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const personRoute = require('./routes/personRputes') 
 const menuroutes = require('./routes/menuRotes');
-const passport = require('passport');
 const Person = require("./models/Persons");
-const LocalStrategy = require('passport-local').Strategy;
+const passport = require('./auth')
 
 
 app.use(bodyParser.json());
@@ -85,27 +84,6 @@ app.use(logRequest)
 
 
 //*****************************************Passsport Logic Implementation  **********************************************/
-
-passport.use(new LocalStrategy(async (username, password, done) => {
-  try {
-    console.log('Received Credentials:', username);
-    const user = await Person.findOne({ username });
-
-    if (!user) {
-      return done(null, false, { message: 'Incorrect Username' });
-    }
-
-    const isPasswordMatch = user.password === password;
-
-    if (isPasswordMatch) {
-      return done(null, user);
-    } else {
-      return done(null, false, { message: 'Incorrect Password' });
-    }
-  } catch (error) {
-    return done(error);
-  }
-}));
 
 
 app.use(passport.initialize());
