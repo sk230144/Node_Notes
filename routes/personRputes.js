@@ -4,7 +4,7 @@ const Person = require("../models/Persons");
 const { json } = require("body-parser");
 
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const data = req.body;
     const newPerson = Person(data);
